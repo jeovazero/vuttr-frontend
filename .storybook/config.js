@@ -5,6 +5,8 @@ import { withInfo } from '@storybook/addon-info'
 import { ThemeProvider } from 'emotion-theming'
 import { configure, addDecorator, addParameters } from '@storybook/react'
 
+import './index.css'
+
 addDecorator(
   withInfo({
     inline: true,
