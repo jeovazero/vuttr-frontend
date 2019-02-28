@@ -55,12 +55,12 @@ module.exports = {
     LightTeal: '#98E1FE',
     LighterTeal: '#EAF9FF',
 
-    GradientInk: 'linear-gradient(to bottom, #0000BB, #170C3A)',
-    GradientYellow: 'linear-gradient(to bottom, #FFBB43, #F95E5A)',
-    GradientGreen: 'linear-gradient(to bottom, #9BEB5D, #12DB89)',
-    GradientTeal: 'linear-gradient(to bottom, #30C3FC, #64E8E3)',
-    GradientBlue: 'linear-gradient(to bottom, #365DF0, #4B00F0)',
-    GradientWhite: 'linear-gradient(to bottom, #DEDCE1, #FCFCFD)'
+    GradientInk: '#0000BB, #170C3A',
+    GradientYellow: '#FFBB43, #F95E5A',
+    GradientGreen: '#9BEB5D, #12DB89',
+    GradientTeal: '#30C3FC, #64E8E3',
+    GradientBlue: '#365DF0, #4B00F0',
+    GradientWhite: '#DEDCE1, #FCFCFD'
   },
   fontSize: {
     H1: '42px',
