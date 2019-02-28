@@ -3,8 +3,11 @@
 import type { Node } from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
+type Size = 'small' | 'medium' | 'large'
 
 type Props = {
+  /** Size */
+  size: Size,
   /** Children */
   children: [Node]
 }
