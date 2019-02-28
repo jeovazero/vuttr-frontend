@@ -60,7 +60,7 @@ module.exports = {
     GradientGreen: 'linear-gradient(to bottom, #9BEB5D, #12DB89)',
     GradientTeal: 'linear-gradient(to bottom, #30C3FC, #64E8E3)',
     GradientBlue: 'linear-gradient(to bottom, #365DF0, #4B00F0)',
-    GradientWhite: 'linear-gradient(to bottom, #DEDCE1, #FCFCFD)',
+    GradientWhite: 'linear-gradient(to bottom, #DEDCE1, #FCFCFD)'
   },
   fontSize: {
     H1: '42px',
@@ -70,7 +70,7 @@ module.exports = {
     H5: '24px',
     Medium: '20px',
     Small: '18px',
-    Smallest: '16px',
+    Smallest: '16px'
   },
   fontFamily: '"Source Sans Pro", Verdana, sans-serif'
 }
