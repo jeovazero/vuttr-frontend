@@ -24,7 +24,7 @@ type Props = {
   /** Color */
   color?: Color,
   /** onChange handler */
-  onChange?: () => mixed,
+  onChange?: (text: string) => mixed,
   /** onFocus handler */
   onFocus?: () => mixed,
   /** onBlur handler */
@@ -79,7 +79,7 @@ const Textarea = (props: Props) => {
   return (
     <StyledTextarea size={size} color={color} className={className}>
       <textarea
-        onChange={onChange}
+        onChange={e => onChange && onChange(e.target.value)}
         value={value}
         onBlur={onBlur}
         onFocus={onFocus}

@@ -28,7 +28,7 @@ type Props = {
   /** Color */
   color?: Color,
   /** onChange handler */
-  onChange?: () => mixed,
+  onChange?: (value: string) => mixed,
   /** onFocus handler */
   onFocus?: () => mixed,
   /** onBlur handler */
@@ -70,6 +70,7 @@ const style = ({ theme, prefixIcon, color, size, isFlex }) => css`
     margin: 0;
     padding: 0;
     width: ${isFlex ? '100%' : 'auto'};
+    background-color: ${theme.color.DarkWhite};
   }
 `
 
@@ -100,7 +101,7 @@ const Input = (props: Props) => {
       isFlex={isFlex}
     >
       <input
-        onChange={onChange}
+        onChange={e => onChange && onChange(e.target.value)}
         value={value}
         onBlur={onBlur}
         onFocus={onFocus}
