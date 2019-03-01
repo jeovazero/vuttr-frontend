@@ -6,7 +6,18 @@ import { action } from '@storybook/addon-actions'
 
 const group = 'GROUP-TAG'
 const sizeOptions = ['small', 'medium', 'large']
-const colorOptions = ['Ink', 'DarkBlue', 'Blue', 'LightBlue', 'Teal', 'White']
+const colorOptions = [
+  'Ink',
+  'DarkBlue',
+  'Blue',
+  'LightBlue',
+  'Teal',
+  'Yellow',
+  'Purple',
+  'Green',
+  'Red',
+  'White'
+]
 
 storiesOf('Atoms', module).add('Tag', () => {
   const size = select('size', sizeOptions, 'medium', group)
