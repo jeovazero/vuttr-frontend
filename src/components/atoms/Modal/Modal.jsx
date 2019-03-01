@@ -5,7 +5,9 @@ import { css, jsx } from '@emotion/core'
 
 type Props = {
   /** Flag isOpen */
-  isOpen: boolean
+  isOpen: boolean,
+  /** className */
+  className?: string
 }
 
 const style = ({ theme, isOpen }) => css`
@@ -25,7 +27,10 @@ const StyledModal = styled.div`
 `
 
 /** Modal component */
-const Modal = (props: Props) => <StyledModal {...props} />
+const Modal = (props: Props) => {
+  const { isOpen, className } = props
+  return <StyledModal isOpen={isOpen} className={className} />
+}
 
 Modal.defaultProps = {
   isOpen: false

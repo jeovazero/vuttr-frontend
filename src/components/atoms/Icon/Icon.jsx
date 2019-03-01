@@ -28,7 +28,9 @@ type Props = {
   /** Size */
   size?: Size,
   /** Color */
-  color?: Color
+  color?: Color,
+  /** className */
+  className?: string
 }
 
 const style = ({ theme, kind, color, size }) => css`
@@ -51,11 +53,16 @@ const StyledIcon = styled.span`
 `
 
 /** Icon component */
-const Icon = (props: Props) => <StyledIcon {...props} />
+const Icon = (props: Props) => {
+  const { kind, className, size, color } = props
+  return (
+    <StyledIcon className={className} kind={kind} color={color} size={size} />
+  )
+}
 
 Icon.defaultProps = {
   size: 'small',
-  color: 'Blue'
+  color: 'Ink'
 }
 
 export default Icon

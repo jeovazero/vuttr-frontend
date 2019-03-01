@@ -15,7 +15,9 @@ type Props = {
   /** Color */
   color?: Color,
   /** onClick handler */
-  onClick?: () => mixed
+  onClick?: () => mixed,
+  /** className */
+  className?: string
 }
 
 const paddingSizes = {
@@ -60,8 +62,12 @@ const StyledTag = styled.span`
 
 /** Tag component */
 const Tag = (props: Props) => {
-  const { label } = props
-  return <StyledTag {...props}>{label}</StyledTag>
+  const { label, className, color, size } = props
+  return (
+    <StyledTag className={className} color={color} size={size}>
+      {label}
+    </StyledTag>
+  )
 }
 
 Tag.defaultProps = {

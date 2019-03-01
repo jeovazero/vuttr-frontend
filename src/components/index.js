@@ -12,3 +12,7 @@ export { default as Modal } from './atoms/Modal/Modal'
 export { default as P } from './atoms/Paragraph/P'
 export { default as Tag } from './atoms/Tag/Tag'
 export { default as Textarea } from './atoms/Textarea/Textarea'
+
+export { default as Card } from './molecules/Card/Card'
+export { default as DialogBox } from './molecules/DialogBox/DialogBox'
+export { default as SearchBar } from './molecules/SearchBar/SearchBar'

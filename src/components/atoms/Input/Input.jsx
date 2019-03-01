@@ -28,7 +28,7 @@ type Props = {
   /** Color */
   color?: Color,
   /** onChange handler */
-  onChange?: () => mixed,
+  onChange?: (value: string) => mixed,
   /** onFocus handler */
   onFocus?: () => mixed,
   /** onBlur handler */
@@ -36,18 +36,22 @@ type Props = {
   /** Value */
   value?: string,
   /** Placeholder */
-  placeholder?: string
+  placeholder?: string,
+  /** className */
+  className?: string,
+  /** isFlex */
+  isFlex: false
 }
 
-const style = ({ theme, kind, prefixIcon, color, size }) => css`
-  padding: 0.5rem;
+const style = ({ theme, prefixIcon, color, size, isFlex }) => css`
+  padding: 0.5rem 1rem;
   margin: 0;
-  border: 0;
+  border: 1px solid ${theme.color.LighterInk};
   font-weight: normal;
   font-size: ${sizes[size]};
   vertical-align: baseline;
   font-family: ${theme.fontFamily};
-  background-color: ${theme.color.White};
+  background-color: ${theme.color.DarkWhite};
   color: ${theme.color[color]};
   ::before {
     padding: 0 0.5rem;
@@ -55,9 +59,8 @@ const style = ({ theme, kind, prefixIcon, color, size }) => css`
     content: ${prefixIcon ? icons[prefixIcon] : 'none'};
     display: inline-block;
   }
-  display: inline-block;
-  border-radius: 8px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.125);
+  display: ${isFlex ? 'flex' : 'inline-block'};
+  border-radius: 20px;
   input {
     font-size: ${sizes[size]};
     font-weight: normal;
@@ -66,6 +69,8 @@ const style = ({ theme, kind, prefixIcon, color, size }) => css`
     border: 0;
     margin: 0;
     padding: 0;
+    width: ${isFlex ? '100%' : 'auto'};
+    background-color: ${theme.color.DarkWhite};
   }
 `
 
@@ -73,13 +78,30 @@ const StyledInput = styled.span`
   ${style}
 `
 
-/** Icon component */
+/** Input component */
 const Input = (props: Props) => {
-  const { onChange, value, onBlur, onFocus, placeholder } = props
+  const {
+    onChange,
+    value,
+    onBlur,
+    onFocus,
+    placeholder,
+    className,
+    color,
+    size,
+    prefixIcon,
+    isFlex
+  } = props
   return (
-    <StyledInput {...props}>
+    <StyledInput
+      color={color}
+      size={size}
+      prefixIcon={prefixIcon}
+      className={className}
+      isFlex={isFlex}
+    >
       <input
-        onChange={onChange}
+        onChange={e => onChange && onChange(e.target.value)}
         value={value}
         onBlur={onBlur}
         onFocus={onFocus}
@@ -91,7 +113,8 @@ const Input = (props: Props) => {
 
 Input.defaultProps = {
   size: 'medium',
-  color: 'Blue'
+  color: 'Ink',
+  isFlex: false
 }
 
 export default Input

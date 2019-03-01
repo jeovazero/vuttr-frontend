@@ -15,6 +15,7 @@ type Props = {
   tags: [string],
   /** onRemove handler */
   onRemove?: () => mixed,
+  /** className */
   className?: string
 }
 

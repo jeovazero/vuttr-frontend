@@ -14,7 +14,9 @@ type Props = {
   /** Hadler to Flag of search in only tags */
   isSearchTagsHandler: () => mixed,
   /** onChange handler of input search */
-  onChangeText: () => mixed
+  onChangeText: () => mixed,
+  /** className */
+  className?: string
 }
 
 const style = ({ theme }) => css`
@@ -44,11 +46,12 @@ const SearchBar = (props: Props) => {
     value = '',
     isSearchTags,
     isSearchTagsHandler,
-    onChangeText
+    onChangeText,
+    className
   } = props
 
   return (
-    <StyledSearchBar>
+    <StyledSearchBar className={className}>
       <Input
         prefixIcon='search'
         onChange={onChangeText}
