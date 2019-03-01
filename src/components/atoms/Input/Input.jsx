@@ -36,10 +36,12 @@ type Props = {
   /** Value */
   value?: string,
   /** Placeholder */
-  placeholder?: string
+  placeholder?: string,
+  /** className */
+  className?: string
 }
 
-const style = ({ theme, kind, prefixIcon, color, size }) => css`
+const style = ({ theme, prefixIcon, color, size }) => css`
   padding: 0.5rem;
   margin: 0;
   border: 0;
@@ -75,9 +77,24 @@ const StyledInput = styled.span`
 
 /** Input component */
 const Input = (props: Props) => {
-  const { onChange, value, onBlur, onFocus, placeholder } = props
+  const {
+    onChange,
+    value,
+    onBlur,
+    onFocus,
+    placeholder,
+    className,
+    color,
+    size,
+    prefixIcon
+  } = props
   return (
-    <StyledInput {...props}>
+    <StyledInput
+      color={color}
+      size={size}
+      prefixIcon={prefixIcon}
+      className={className}
+    >
       <input
         onChange={onChange}
         value={value}

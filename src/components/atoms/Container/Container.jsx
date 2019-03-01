@@ -9,7 +9,9 @@ type Props = {
   /** Size */
   size: Size,
   /** Children */
-  children: [Node]
+  children: [Node],
+  /** className */
+  className?: string
 }
 
 const paddingSizes = {
@@ -36,9 +38,13 @@ const StyledContainer = styled.div`
 
 /** Container component */
 const Container = (props: Props) => {
-  const { size, children } = props
+  const { size, children, className } = props
 
-  return <StyledContainer size={size}>{children}</StyledContainer>
+  return (
+    <StyledContainer size={size} className={className}>
+      {children}
+    </StyledContainer>
+  )
 }
 
 Container.defaultProps = {

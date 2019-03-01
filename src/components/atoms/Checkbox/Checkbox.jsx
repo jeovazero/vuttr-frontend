@@ -25,7 +25,9 @@ type Props = {
   /** Color */
   color: Color,
   /** onCheck handler */
-  onCheck: () => mixed
+  onCheck: () => mixed,
+  /** className */
+  className?: string
 }
 
 const fontSize = {
@@ -60,8 +62,16 @@ const StyledCheckbox = styled.div`
 
 /** Checkbox Component */
 const Checkbox = (props: Props) => {
-  const { onCheck } = props
-  return <StyledCheckbox onClick={onCheck} {...props} />
+  const { onCheck, className, isChecked, size, color } = props
+  return (
+    <StyledCheckbox
+      onClick={onCheck}
+      className={className}
+      isChecked={isChecked}
+      size={size}
+      color={color}
+    />
+  )
 }
 
 Checkbox.defaultProps = {

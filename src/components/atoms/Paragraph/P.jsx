@@ -21,7 +21,9 @@ type Props = {
   /** Label */
   children: string,
   /** Kind of paragraph */
-  kind: Kind
+  kind: Kind,
+  /** className */
+  className?: string
 }
 
 const font = (weight, size, height, color) => `
@@ -60,8 +62,8 @@ const StyledP = styled.p`
 
 /** P component */
 const P = (props: Props) => {
-  const { children } = props
-  return <StyledP {...props}>{children}</StyledP>
+  const { children, className } = props
+  return <StyledP className={className}>{children}</StyledP>
 }
 
 P.defaultProps = {
