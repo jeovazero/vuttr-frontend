@@ -5,7 +5,17 @@ import { css, jsx } from '@emotion/core'
 
 type Size = 'small' | 'medium' | 'large'
 
-type Color = 'Ink' | 'DarkBlue' | 'Blue' | 'LightBlue' | 'Teal' | 'White'
+type Color =
+  | 'Ink'
+  | 'DarkBlue'
+  | 'Blue'
+  | 'LightBlue'
+  | 'Teal'
+  | 'Yellow'
+  | 'Purple'
+  | 'Green'
+  | 'Red'
+  | 'White'
 
 type Props = {
   /** Label */
@@ -38,7 +48,11 @@ const textColors = ({ color }) => ({
   Blue: color.White,
   LightBlue: color.White,
   Teal: color.White,
-  White: color.LightInk
+  White: color.LightInk,
+  Yellow: color.White,
+  Purple: color.White,
+  Green: color.White,
+  Red: color.White
 })
 
 const style = ({ theme, color, size }) => css`
