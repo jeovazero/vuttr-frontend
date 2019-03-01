@@ -17,7 +17,7 @@ const style = ({ theme }) => css`
   font-weight: 600;
   font-size: 24px;
   text-align: left;
-  letter-spacing: 2px;
+  letter-spacing: 0px;
   line-height: 30px;
   vertical-align: baseline;
   font-family: ${theme.fontFamily};

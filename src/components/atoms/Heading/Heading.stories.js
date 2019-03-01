@@ -39,11 +39,26 @@ storiesOf('Atoms', module).add('Heading', () => {
 
   return (
     <div>
-      <H1>{label1}</H1>
-      <H2>{label2}</H2>
-      <H3>{label3}</H3>
-      <H4>{label4}</H4>
-      <H5>{label5}</H5>
+      <div>
+        {' '}
+        <H1>{label1}</H1>{' '}
+      </div>
+      <div>
+        {' '}
+        <H2>{label2}</H2>{' '}
+      </div>
+      <div>
+        {' '}
+        <H3>{label3}</H3>{' '}
+      </div>
+      <div>
+        {' '}
+        <H4>{label4}</H4>{' '}
+      </div>
+      <div>
+        {' '}
+        <H5>{label5}</H5>{' '}
+      </div>
     </div>
   )
 })
