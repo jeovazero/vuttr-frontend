@@ -39,19 +39,19 @@ type Props = {
   placeholder?: string,
   /** className */
   className?: string,
-  /** isBlock */
-  isBlock: false
+  /** isFlex */
+  isFlex: false
 }
 
-const style = ({ theme, prefixIcon, color, size, isBlock }) => css`
-  padding: 0.5rem;
+const style = ({ theme, prefixIcon, color, size, isFlex }) => css`
+  padding: 0.5rem 1rem;
   margin: 0;
-  border: 0;
+  border: 1px solid ${theme.color.LighterInk};
   font-weight: normal;
   font-size: ${sizes[size]};
   vertical-align: baseline;
   font-family: ${theme.fontFamily};
-  background-color: ${theme.color.White};
+  background-color: ${theme.color.DarkWhite};
   color: ${theme.color[color]};
   ::before {
     padding: 0 0.5rem;
@@ -59,9 +59,8 @@ const style = ({ theme, prefixIcon, color, size, isBlock }) => css`
     content: ${prefixIcon ? icons[prefixIcon] : 'none'};
     display: inline-block;
   }
-  display: ${isBlock ? 'block' : 'inline-block'};
-  border-radius: 8px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.125);
+  display: ${isFlex ? 'flex' : 'inline-block'};
+  border-radius: 20px;
   input {
     font-size: ${sizes[size]};
     font-weight: normal;
@@ -70,7 +69,7 @@ const style = ({ theme, prefixIcon, color, size, isBlock }) => css`
     border: 0;
     margin: 0;
     padding: 0;
-    display: ${isBlock ? 'block' : 'inline-block'};
+    width: ${isFlex ? '100%' : 'auto'};
   }
 `
 
@@ -90,7 +89,7 @@ const Input = (props: Props) => {
     color,
     size,
     prefixIcon,
-    isBlock
+    isFlex
   } = props
   return (
     <StyledInput
@@ -98,7 +97,7 @@ const Input = (props: Props) => {
       size={size}
       prefixIcon={prefixIcon}
       className={className}
-      isBlock={isBlock}
+      isFlex={isFlex}
     >
       <input
         onChange={onChange}
@@ -114,7 +113,7 @@ const Input = (props: Props) => {
 Input.defaultProps = {
   size: 'medium',
   color: 'Ink',
-  isBlock: false
+  isFlex: false
 }
 
 export default Input
