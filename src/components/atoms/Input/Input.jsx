@@ -108,7 +108,7 @@ const Input = (props: Props) => {
 
 Input.defaultProps = {
   size: 'medium',
-  color: 'Blue'
+  color: 'Ink'
 }
 
 export default Input

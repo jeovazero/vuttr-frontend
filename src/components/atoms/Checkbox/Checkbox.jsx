@@ -77,7 +77,7 @@ const Checkbox = (props: Props) => {
 Checkbox.defaultProps = {
   size: 'medium',
   isChecked: false,
-  color: 'Blue'
+  color: 'Ink'
 }
 
 export default Checkbox

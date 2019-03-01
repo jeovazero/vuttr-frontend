@@ -91,7 +91,7 @@ const Textarea = (props: Props) => {
 
 Textarea.defaultProps = {
   size: 'medium',
-  color: 'Blue'
+  color: 'Ink'
 }
 
 export default Textarea

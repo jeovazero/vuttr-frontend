@@ -11,7 +11,7 @@ const colorOptions = ['Ink', 'DarkBlue', 'Blue', 'LightBlue', 'Teal', 'White']
 storiesOf('Atoms', module).add('Icon', () => {
   const kind = select('kind', kindOptions, 'plus', group)
   const size = select('size', sizeOptions, 'small', group)
-  const color = select('color', colorOptions, 'Blue', group)
+  const color = select('color', colorOptions, 'Ink', group)
 
   return <Icon kind={kind} size={size} color={color} />
 })
