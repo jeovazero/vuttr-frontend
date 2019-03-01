@@ -62,8 +62,12 @@ const StyledP = styled.p`
 
 /** P component */
 const P = (props: Props) => {
-  const { children, className } = props
-  return <StyledP className={className}>{children}</StyledP>
+  const { children, className, kind } = props
+  return (
+    <StyledP className={className} kind={kind}>
+      {children}
+    </StyledP>
+  )
 }
 
 P.defaultProps = {
