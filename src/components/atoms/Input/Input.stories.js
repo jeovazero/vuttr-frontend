@@ -13,6 +13,7 @@ storiesOf('Atoms', module).add('Input', () => {
   const icon = select('prefixIcon', iconOptions, null, group)
   const size = select('size', sizeOptions, 'medium', group)
   const color = select('color', colorOptions, 'Ink', group)
+  const isBlock = select('isBlock', [false, true], false, group)
   const value = text('Value', 'value', group)
   const placeholder = text('Placeholder', 'Digite...', group)
   return (
@@ -25,6 +26,7 @@ storiesOf('Atoms', module).add('Input', () => {
       onBlur={action('[Input]: onBlur!')}
       onFocus={action('[Input]: onFocus!')}
       placeholder={placeholder}
+      isBlock={isBlock}
     />
   )
 })

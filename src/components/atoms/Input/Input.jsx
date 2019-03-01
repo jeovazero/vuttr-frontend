@@ -38,10 +38,12 @@ type Props = {
   /** Placeholder */
   placeholder?: string,
   /** className */
-  className?: string
+  className?: string,
+  /** isBlock */
+  isBlock: false
 }
 
-const style = ({ theme, prefixIcon, color, size }) => css`
+const style = ({ theme, prefixIcon, color, size, isBlock }) => css`
   padding: 0.5rem;
   margin: 0;
   border: 0;
@@ -57,7 +59,7 @@ const style = ({ theme, prefixIcon, color, size }) => css`
     content: ${prefixIcon ? icons[prefixIcon] : 'none'};
     display: inline-block;
   }
-  display: inline-block;
+  display: ${isBlock ? 'block' : 'inline-block'};
   border-radius: 8px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.125);
   input {
@@ -68,6 +70,7 @@ const style = ({ theme, prefixIcon, color, size }) => css`
     border: 0;
     margin: 0;
     padding: 0;
+    display: ${isBlock ? 'block' : 'inline-block'};
   }
 `
 
@@ -86,7 +89,8 @@ const Input = (props: Props) => {
     className,
     color,
     size,
-    prefixIcon
+    prefixIcon,
+    isBlock
   } = props
   return (
     <StyledInput
@@ -94,6 +98,7 @@ const Input = (props: Props) => {
       size={size}
       prefixIcon={prefixIcon}
       className={className}
+      isBlock={isBlock}
     >
       <input
         onChange={onChange}
@@ -108,7 +113,8 @@ const Input = (props: Props) => {
 
 Input.defaultProps = {
   size: 'medium',
-  color: 'Ink'
+  color: 'Ink',
+  isBlock: false
 }
 
 export default Input

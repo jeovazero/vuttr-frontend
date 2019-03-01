@@ -11,7 +11,9 @@ type Props = {
   /** Children */
   children: [Node],
   /** className */
-  className?: string
+  className?: string,
+  /** isBlock */
+  isBlock?: boolean
 }
 
 const paddingSizes = {
@@ -20,14 +22,14 @@ const paddingSizes = {
   large: '2.5rem'
 }
 
-const style = ({ theme, size }) => css`
+const style = ({ theme, size, isBlock }) => css`
   padding: ${paddingSizes[size]};
   margin: 0;
   border: 2px solid ${theme.color.DarkerWhite};
   font: inheit;
   vertical-align: baseline;
   background-color: ${theme.color.White};
-  display: inline-block;
+  display: ${isBlock ? 'block' : 'inline-block'};
   border-radius: 4px;
   box-shadow: 0 10px 44px -10px rgba(0, 0, 0, 0.1);
 `
@@ -38,17 +40,18 @@ const StyledContainer = styled.div`
 
 /** Container component */
 const Container = (props: Props) => {
-  const { size, children, className } = props
+  const { size, children, className, isBlock } = props
 
   return (
-    <StyledContainer size={size} className={className}>
+    <StyledContainer size={size} className={className} isBlock={isBlock}>
       {children}
     </StyledContainer>
   )
 }
 
 Container.defaultProps = {
-  size: 'medium'
+  size: 'medium',
+  isBlock: false
 }
 
 export default Container
