@@ -17,12 +17,14 @@ const tool = {
 
 storiesOf('Molecules', module).add('Card', () => {
   const title = text('title', tool.title, group)
+  const highlightTag = text('highlightTag', 'calendar', group)
   const link = text('link', tool.link, group)
   const description = text('description', tool.description, group)
   const tags = object('tags', tool.tags, group)
 
   return (
     <Card
+      highlightTag={highlightTag}
       title={title}
       description={description}
       link={link}
