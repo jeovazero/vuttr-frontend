@@ -76,7 +76,7 @@ const style = ({ theme }) => css`
   }
 
   .vuttr__dialogbox__content {
-    padding: 2rem 1.75rem;
+    padding: 1.5rem 1rem;
   }
 `
 
@@ -106,7 +106,7 @@ const DialogBox = (props: Props) => {
     <div>
       <Modal isOpen={isOpen} />
       <StyledDialogBox className={className}>
-        <Container size='medium'>
+        <Container size='small' isBlock>
           <div className='vuttr__dialogbox__header'>
             <div className='vuttr__dialogbox__title'>
               {titleIcon && <Icon kind={titleIcon} size='medium' color='Ink' />}
@@ -138,6 +138,6 @@ const DialogBox = (props: Props) => {
   )
 }
 
-DialogBox.defaultProps = { isOpen: false }
+DialogBox.defaultProps = { isOpen: false, isBlock: false }
 
 export default DialogBox
