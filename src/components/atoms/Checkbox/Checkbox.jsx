@@ -36,10 +36,17 @@ const fontSize = {
   large: '1.5rem'
 }
 
+const borderRadius = {
+  small: '4px',
+  medium: '6px',
+  large: '8px'
+}
+
 const style = ({ theme, isChecked, size, color }) => css`
   padding: 0;
   margin: 0;
   border: 2px solid;
+  border-radius: ${borderRadius[size]};
   font-family: 'Ionicons';
   font-weight: normal;
   font-size: ${fontSize[size]};
@@ -49,7 +56,7 @@ const style = ({ theme, isChecked, size, color }) => css`
   height: ${fontSize[size]};
   text-align: center;
   :after {
-    content: ${isChecked ? '"\f121"' : ''};
+    content: ${isChecked ? '"\f121"' : ' '};
   }
   display: inline-block;
   color: ${theme.color[color]};
