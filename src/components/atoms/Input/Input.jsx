@@ -73,7 +73,7 @@ const StyledInput = styled.span`
   ${style}
 `
 
-/** Icon component */
+/** Input component */
 const Input = (props: Props) => {
   const { onChange, value, onBlur, onFocus, placeholder } = props
   return (

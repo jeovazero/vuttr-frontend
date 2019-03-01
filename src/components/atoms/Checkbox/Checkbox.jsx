@@ -58,6 +58,7 @@ const StyledCheckbox = styled.div`
   ${style}
 `
 
+/** Checkbox Component */
 const Checkbox = (props: Props) => {
   const { onCheck } = props
   return <StyledCheckbox onClick={onCheck} {...props} />
