@@ -12,7 +12,9 @@ type Props = {
   /** Link */
   link: string,
   /** List of tags */
-  tags: [string],
+  tags: string[],
+  /** Tag to hightlight */
+  highlightTag: string,
   /** onRemove handler */
   onRemove?: () => mixed,
   /** className */
@@ -64,11 +66,19 @@ const StyledCard = styled.div`
 
 /** Card component */
 const Card = (props: Props) => {
-  const { title, description, link, tags, onRemove, className } = props
+  const {
+    title,
+    description,
+    link,
+    tags,
+    onRemove,
+    className,
+    highlightTag
+  } = props
 
   return (
     <StyledCard className={className}>
-      <Container size='medium'>
+      <Container size='medium' isBlock>
         <div className='vuttr__card__header'>
           <div className='vuttr__dialogbox__title'>
             <a href={link}>
@@ -87,7 +97,11 @@ const Card = (props: Props) => {
 
         <div className='vuttr__card__tags'>
           {tags.map((tag, i) => (
-            <Tag label={tag} key={i} />
+            <Tag
+              label={tag}
+              key={i}
+              color={tag === highlightTag ? 'Yellow' : 'Blue'}
+            />
           ))}
         </div>
       </Container>
