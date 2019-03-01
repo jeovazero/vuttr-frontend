@@ -5,7 +5,9 @@ import { css, jsx } from '@emotion/core'
 
 type Props = {
   /** Text */
-  children: string
+  children: string,
+  /** className */
+  className?: string
 }
 
 const style = ({ theme }) => css`
@@ -15,7 +17,7 @@ const style = ({ theme }) => css`
   font-weight: 600;
   font-size: 24px;
   text-align: left;
-  letter-spacing: 2px;
+  letter-spacing: 0px;
   line-height: 30px;
   vertical-align: baseline;
   font-family: ${theme.fontFamily};
@@ -30,8 +32,8 @@ const StyledH5 = styled.h5`
 
 /** H5 component */
 const H5 = (props: Props) => {
-  const { children } = props
-  return <StyledH5 {...props}>{children}</StyledH5>
+  const { children, className } = props
+  return <StyledH5 className={className}>{children}</StyledH5>
 }
 
 H5.defaultProps = {}

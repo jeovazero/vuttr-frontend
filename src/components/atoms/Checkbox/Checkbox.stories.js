@@ -22,7 +22,7 @@ const colorOptions = [
 storiesOf('Atoms', module).add('Checkbox', () => {
   const isChecked = select('isChecked', [true, false], false, group)
   const size = select('size', sizeOptions, 'medium', group)
-  const color = select('color', colorOptions, 'Blue', group)
+  const color = select('color', colorOptions, 'Ink', group)
 
   return (
     <Checkbox

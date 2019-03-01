@@ -10,7 +10,7 @@ const colorOptions = ['Ink', 'DarkBlue', 'Blue', 'Teal']
 
 storiesOf('Atoms', module).add('Textarea', () => {
   const size = select('size', sizeOptions, 'medium', group)
-  const color = select('color', colorOptions, 'Blue', group)
+  const color = select('color', colorOptions, 'Ink', group)
   const value = text('Value', 'value', group)
   const placeholder = text('Placeholder', 'Digite...', group)
   return (

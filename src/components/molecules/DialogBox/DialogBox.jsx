@@ -25,7 +25,9 @@ type Props = {
   /** onCancel handler */
   onCancel?: () => mixed,
   /** isOpen flag */
-  isOpen?: boolean
+  isOpen?: boolean,
+  /** className */
+  className?: string
 }
 
 const style = ({ theme }) => css`
@@ -74,7 +76,7 @@ const style = ({ theme }) => css`
   }
 
   .vuttr__dialogbox__content {
-    padding: 2rem 1.75rem;
+    padding: 1.5rem 1rem;
   }
 `
 
@@ -93,7 +95,8 @@ const DialogBox = (props: Props) => {
     onCancel,
     onClose,
     onConfirm,
-    children
+    children,
+    className
   } = props
 
   const isValidText = (str = '') => str && str.length > 0
@@ -102,8 +105,8 @@ const DialogBox = (props: Props) => {
   return (
     <div>
       <Modal isOpen={isOpen} />
-      <StyledDialogBox>
-        <Container size='medium'>
+      <StyledDialogBox className={className}>
+        <Container size='small' isBlock>
           <div className='vuttr__dialogbox__header'>
             <div className='vuttr__dialogbox__title'>
               {titleIcon && <Icon kind={titleIcon} size='medium' color='Ink' />}
@@ -135,6 +138,6 @@ const DialogBox = (props: Props) => {
   )
 }
 
-DialogBox.defaultProps = { isOpen: false }
+DialogBox.defaultProps = { isOpen: false, isBlock: false }
 
 export default DialogBox

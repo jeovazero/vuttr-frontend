@@ -24,7 +24,7 @@ type Props = {
   /** Color */
   color?: Color,
   /** onChange handler */
-  onChange?: () => mixed,
+  onChange?: (text: string) => mixed,
   /** onFocus handler */
   onFocus?: () => mixed,
   /** onBlur handler */
@@ -32,7 +32,9 @@ type Props = {
   /** Value */
   value?: string,
   /** Placeholder */
-  placeholder?: string
+  placeholder?: string,
+  /** className */
+  className?: string
 }
 
 const style = ({ theme, color, size }) => css`
@@ -64,11 +66,20 @@ const StyledTextarea = styled.div`
 
 /** Textarea component */
 const Textarea = (props: Props) => {
-  const { onChange, value, onBlur, onFocus, placeholder, size, color } = props
+  const {
+    onChange,
+    value,
+    onBlur,
+    onFocus,
+    placeholder,
+    size,
+    color,
+    className
+  } = props
   return (
-    <StyledTextarea size={size} color={color}>
+    <StyledTextarea size={size} color={color} className={className}>
       <textarea
-        onChange={onChange}
+        onChange={e => onChange && onChange(e.target.value)}
         value={value}
         onBlur={onBlur}
         onFocus={onFocus}
@@ -80,7 +91,7 @@ const Textarea = (props: Props) => {
 
 Textarea.defaultProps = {
   size: 'medium',
-  color: 'Blue'
+  color: 'Ink'
 }
 
 export default Textarea

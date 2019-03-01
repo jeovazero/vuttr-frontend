@@ -5,7 +5,9 @@ import { css, jsx } from '@emotion/core'
 
 type Props = {
   /** Text */
-  children: string
+  children: string,
+  /** className */
+  className?: string
 }
 
 const style = ({ theme }) => css`
@@ -30,8 +32,8 @@ const StyledH2 = styled.h2`
 
 /** H2 component */
 const H2 = (props: Props) => {
-  const { children } = props
-  return <StyledH2 {...props}>{children}</StyledH2>
+  const { children, className } = props
+  return <StyledH2 className={className}>{children}</StyledH2>
 }
 
 H2.defaultProps = {}

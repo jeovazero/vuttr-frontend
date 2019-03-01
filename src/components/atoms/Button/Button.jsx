@@ -52,7 +52,9 @@ type Props = {
   /** Label of button */
   children: string,
   /** onClick handler */
-  onClick?: () => mixed
+  onClick?: () => mixed,
+  /** className */
+  className?: string
 }
 
 const style = ({ theme, kind, size }) => {
@@ -111,9 +113,14 @@ const StyledButton = styled.button`
 
 /** Button Component  */
 const Button = (props: Props) => {
-  const { onClick, prefix, suffix, children, kind, size } = props
+  const { onClick, prefix, suffix, children, kind, size, className } = props
   return (
-    <StyledButton onClick={onClick} kind={kind} size={size}>
+    <StyledButton
+      onClick={onClick}
+      kind={kind}
+      size={size}
+      className={className}
+    >
       {prefix}
       <span className='vuttr__button-label'>{children}</span>
       {suffix}
