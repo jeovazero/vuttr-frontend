@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import type { Node } from 'react'
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
+import { css, jsx, keyframes } from '@emotion/core'
 import { H5, Button, Icon, Container, Modal } from '../../index'
 
 type IconType = 'plus' | 'close' | 'checkmark' | 'search'
@@ -30,6 +30,18 @@ type Props = {
   className?: string
 }
 
+const showing = keyframes`
+  0%{
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+    transform: scale(1);
+  }
+
+`
+
 const style = ({ theme }) => css`
   padding: 0;
   border: 0;
@@ -39,6 +51,8 @@ const style = ({ theme }) => css`
 
   box-sizing: border-box;
   width: 480px;
+
+  animation: ${showing} 0.2s ease;
 
   .vuttr__dialogbox__header {
     display: flex;
