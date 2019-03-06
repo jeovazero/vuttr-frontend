@@ -1,9 +1,9 @@
 // @flow
 /** @jsx jsx */
-import { useState, useEffect } from 'react'
-import styled from '@emotion/styled'
-import { css, jsx, Global } from '@emotion/core'
 import theme from './theme.js'
+import styled from '@emotion/styled'
+import { useState } from 'react'
+import { css, jsx, Global } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 import {
   H1,
@@ -15,7 +15,7 @@ import {
   AddToolDialogBox,
   RemoveToolDialogBox
 } from './components/index.js'
-import apiclient from '../helpers/apiclient'
+import { useApiVuttr } from '../helpers/useApiVuttr'
 
 type Props = {
   className: string
@@ -62,57 +62,42 @@ const VSmallSpacing = styled.div`
 `
 
 const App = ({ className }: Props) => {
-  const [isTagsLike, setIsTagsLike] = useState(false)
-  const [query, setQuery] = useState('')
-  const highlightTag = isTagsLike ? query : ''
+  const {
+    data,
+    isLoading,
+    isError,
+    isTagsLike,
+    toggleTagsLike,
+    query,
+    setQuery,
+    highlightTag,
+    postTool,
+    deleteTool
+  } = useApiVuttr()
+  console.log({ data, isTagsLike, isLoading, isError })
 
-  const [tools, setTools] = useState([])
-  const [newTool, setNewTool] = useState({})
+  const [isOpenAddTool, setOpenAddTool] = useState(false)
+  const [isOpenRemoveTool, setOpenRemoveTool] = useState(false)
+  const [deleteToolID, setDeleteToolID] = useState(null)
 
-  const [idDeleteTool, setIdDeleteTool] = useState(-1)
-  const [isDeleteTool, setIsDeleteTool] = useState(false)
-  const [isGetTools, setIsGetTools] = useState(true)
-
-  const [isOpenAdd, setIsOpenAdd] = useState(false)
-  const [isOpenRemove, setIsOpenRemove] = useState(false)
-
-  useEffect(() => {
-    if (idDeleteTool >= 0) {
-      apiclient.deleteTool({ id: idDeleteTool }).then(response => {
-        setQuery('')
-        setIsTagsLike(false)
-        setIsGetTools(true)
-        setIsDeleteTool(false)
-        setIsOpenRemove(false)
-      })
+  const removeTool = () => {
+    if (deleteToolID) {
+      deleteTool(deleteToolID, () => setOpenRemoveTool(false))
     }
-  }, [isDeleteTool])
+  }
 
-  useEffect(() => {
-    if (Object.keys(newTool).length > 0) {
-      const tool = {
-        ...newTool,
-        tags: newTool.tags
+  const addTool = tool => {
+    if (Object.keys(tool).length > 0) {
+      const newTool = {
+        ...tool,
+        tags: tool.tags
           .trim()
           .replace(/\s{2,}/g, ' ')
           .split(' ')
       }
-      apiclient.addTool({ tool }).then(response => {
-        setQuery('')
-        setIsTagsLike(false)
-        setIsGetTools(true)
-        setIsDeleteTool(false)
-        setIsOpenAdd(false)
-      })
+      postTool(newTool, () => setOpenAddTool(false))
     }
-  }, [newTool])
-
-  useEffect(() => {
-    apiclient.getTools({ query, isTagsLike }).then(response => {
-      setTools(response)
-      setIsGetTools(false)
-    })
-  }, [isGetTools, query, isTagsLike])
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -130,7 +115,7 @@ const App = ({ className }: Props) => {
           <VSpacing>
             <SearchBar
               isSearchTags={isTagsLike}
-              isSearchTagsHandler={() => setIsTagsLike(!isTagsLike)}
+              isSearchTagsHandler={toggleTagsLike}
               value={query}
               placeholder='search'
               onChangeText={setQuery}
@@ -138,14 +123,14 @@ const App = ({ className }: Props) => {
             <Button
               kind='primary'
               prefix={<Icon kind='plus' color='White' />}
-              onClick={setIsOpenAdd}
+              onClick={() => setOpenAddTool(true)}
             >
               Add
             </Button>
           </VSpacing>
 
           <ListWrapper>
-            {tools.map((tool, key) => (
+            {data.map((tool, key) => (
               <VSmallSpacing key={key}>
                 <Card
                   title={tool.title}
@@ -154,8 +139,8 @@ const App = ({ className }: Props) => {
                   link={tool.link}
                   highlightTag={highlightTag}
                   onRemove={() => {
-                    setIdDeleteTool(tool.id)
-                    setIsOpenRemove(true)
+                    setDeleteToolID(tool.id)
+                    setOpenRemoveTool(true)
                   }}
                 />
               </VSmallSpacing>
@@ -163,15 +148,15 @@ const App = ({ className }: Props) => {
           </ListWrapper>
         </Wrapper>
         <AddToolDialogBox
-          isOpen={isOpenAdd}
-          onClose={() => setIsOpenAdd(false)}
-          onConfirm={tool => setNewTool(tool)}
+          isOpen={isOpenAddTool}
+          onClose={() => setOpenAddTool(false)}
+          onConfirm={tool => addTool(tool)}
         />
         <RemoveToolDialogBox
-          isOpen={isOpenRemove}
-          onClose={() => setIsOpenRemove(false)}
-          onConfirm={() => setIsDeleteTool(true)}
-          onCancel={() => setIsOpenRemove(false)}
+          isOpen={isOpenRemoveTool}
+          onClose={() => setOpenRemoveTool(false)}
+          onConfirm={() => removeTool()}
+          onCancel={() => setOpenRemoveTool(false)}
         />
       </StyledApp>
     </ThemeProvider>

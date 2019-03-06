@@ -1,41 +1,43 @@
 const fetch = require('node-fetch')
 const qs = require('querystring')
 
-const API_URL = 'http://localhost:3000/tools'
+const url = (baseUrl, path) => `${baseUrl}${path}`
 
-const endpoint = path => `${API_URL}${path}`
+const _get = (baseUrl, path, params) => {
+  const query = Object.keys(params).length > 0 ? '?' + qs.stringify(params) : ''
+  const target = url(baseUrl, path) + query
 
-const getTools = ({ query, isTagsLike = false }) => {
-  const param = isTagsLike
-    ? tagsLike => ({ tags_like: tagsLike })
-    : q => ({ q })
-
-  const path =
-    query && query.length > 0 ? '?' + qs.stringify(param(query)) : '/'
-
-  return fetch(endpoint(path))
+  return fetch(target)
     .then(res => res.json())
     .then(json => json)
 }
 
-const addTool = ({ tool }) =>
-  fetch(endpoint('/'), {
+const _post = (baseUrl, path, data) => {
+  const target = url(baseUrl, path)
+
+  return fetch(target, {
     method: 'POST',
-    body: JSON.stringify(tool),
+    body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json'
     }
   })
     .then(res => res.json())
     .then(json => json)
+}
 
-const deleteTool = ({ id }) =>
-  fetch(endpoint('/' + id), {
+const _delete = (baseUrl, path, id) => {
+  const target = url(baseUrl, path) + id
+
+  return fetch(target, {
     method: 'DELETE'
   }).then(res => res.ok)
+}
 
-module.exports = {
-  getTools,
-  addTool,
-  deleteTool
+export const api = baseUrl => {
+  return {
+    get: ({ params }) => _get(baseUrl, '/tools', params),
+    post: ({ data }) => _post(baseUrl, '/tools', data),
+    delete: ({ id }) => _delete(baseUrl, '/tools/', id)
+  }
 }
