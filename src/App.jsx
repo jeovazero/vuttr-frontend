@@ -89,9 +89,15 @@ const App = ({ className }: Props) => {
   }, [isDeleteTool])
 
   useEffect(() => {
-    console.log({ newTool })
     if (Object.keys(newTool).length > 0) {
-      apiclient.addTool({ tool: newTool }).then(response => {
+      const tool = {
+        ...newTool,
+        tags: newTool.tags
+          .trim()
+          .replace(/\s{2,}/g, ' ')
+          .split(' ')
+      }
+      apiclient.addTool({ tool }).then(response => {
         setQuery('')
         setIsTagsLike(false)
         setIsGetTools(true)
