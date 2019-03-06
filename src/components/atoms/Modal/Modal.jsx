@@ -1,5 +1,6 @@
 /** @flow */
 /** @jsx jsx */
+import type { Node } from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 
@@ -7,14 +8,19 @@ type Props = {
   /** Flag isOpen */
   isOpen: boolean,
   /** className */
-  className?: string
+  className?: string,
+  /** A html Node */
+  children?: Node
 }
 
 const style = ({ theme, isOpen }) => css`
-  display: ${isOpen ? 'block' : 'none'};
+  display: ${isOpen ? 'flex' : 'none'};
   position: fixed;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   width: 100%;
+  overflow: auto;
   top: 0;
   left: 0;
   margin: 0;
@@ -28,8 +34,12 @@ const StyledModal = styled.div`
 
 /** Modal component */
 const Modal = (props: Props) => {
-  const { isOpen, className } = props
-  return <StyledModal isOpen={isOpen} className={className} />
+  const { isOpen, className, children } = props
+  return (
+    <StyledModal isOpen={isOpen} className={className}>
+      {children}
+    </StyledModal>
+  )
 }
 
 Modal.defaultProps = {
