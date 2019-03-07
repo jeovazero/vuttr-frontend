@@ -53,6 +53,7 @@ const style = ({ theme, kind }) => css`
   margin: 0;
   border: 0;
   ${fontKinds(theme)[kind]}
+  font-family: ${theme.fontFamily};
   display: inline-block;
 `
 

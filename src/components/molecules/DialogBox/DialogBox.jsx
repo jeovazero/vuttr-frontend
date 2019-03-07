@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import type { Node } from 'react'
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
+import { css, jsx, keyframes } from '@emotion/core'
 import { H5, Button, Icon, Container, Modal } from '../../index'
 
 type IconType = 'plus' | 'close' | 'checkmark' | 'search'
@@ -30,20 +30,27 @@ type Props = {
   className?: string
 }
 
+const showing = keyframes`
+  0%{
+    transform: scale(0.3);
+  }
+  100%{
+    transform: scale(1);
+  }
+
+`
+
 const style = ({ theme }) => css`
   padding: 0;
   border: 0;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 2rem;
-  bottom: 0;
   margin: auto;
   font-family: ${theme.fontFamily};
   display: inline-block;
 
   box-sizing: border-box;
   width: 480px;
+
+  animation: ${showing} 0.25s ease;
 
   .vuttr__dialogbox__header {
     display: flex;
@@ -77,6 +84,8 @@ const style = ({ theme }) => css`
 
   .vuttr__dialogbox__content {
     padding: 1.5rem 1rem;
+    max-height: 70vh;
+    overflow-y: auto;
   }
 `
 
@@ -104,36 +113,39 @@ const DialogBox = (props: Props) => {
 
   return (
     <div>
-      <Modal isOpen={isOpen} />
-      <StyledDialogBox className={className}>
-        <Container size='small' isBlock>
-          <div className='vuttr__dialogbox__header'>
-            <div className='vuttr__dialogbox__title'>
-              {titleIcon && <Icon kind={titleIcon} size='medium' color='Ink' />}
-              <H5>{title}</H5>
+      <Modal isOpen={isOpen}>
+        <StyledDialogBox className={className}>
+          <Container size='small' isBlock>
+            <div className='vuttr__dialogbox__header'>
+              <div className='vuttr__dialogbox__title'>
+                {titleIcon && (
+                  <Icon kind={titleIcon} size='medium' color='Ink' />
+                )}
+                <H5>{title}</H5>
+              </div>
+
+              <div onClick={onClose} className='vuttr__dialogbox__close'>
+                <Icon kind='close' size='small' color='Red' />
+              </div>
             </div>
 
-            <div onClick={onClose} className='vuttr__dialogbox__close'>
-              <Icon kind='close' size='small' color='Red' />
+            <div className='vuttr__dialogbox__content'>{children}</div>
+
+            <div className='vuttr__dialogbox__buttons'>
+              {isValidText(cancelText) && (
+                <Button kind='secondary' onClick={onCancel}>
+                  {cancelText}
+                </Button>
+              )}
+              {isValidText(confirmText) && (
+                <Button kind='primary' onClick={onConfirm}>
+                  {confirmText}
+                </Button>
+              )}
             </div>
-          </div>
-
-          <div className='vuttr__dialogbox__content'>{children}</div>
-
-          <div className='vuttr__dialogbox__buttons'>
-            {isValidText(cancelText) && (
-              <Button kind='secondary' onClick={onCancel}>
-                {cancelText}
-              </Button>
-            )}
-            {isValidText(confirmText) && (
-              <Button kind='primary' onClick={onConfirm}>
-                {confirmText}
-              </Button>
-            )}
-          </div>
-        </Container>
-      </StyledDialogBox>
+          </Container>
+        </StyledDialogBox>
+      </Modal>
     </div>
   )
 }

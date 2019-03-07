@@ -61,6 +61,9 @@ const style = ({ theme, isChecked, size, color }) => css`
   display: inline-block;
   color: ${theme.color[color]};
   cursor: pointer;
+  :hover {
+    background-color: ${theme.color.DarkerWhite};
+  }
 `
 
 const StyledCheckbox = styled.div`

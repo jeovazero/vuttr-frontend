@@ -9,7 +9,7 @@ type Tool = {
   title: string,
   link: string,
   description: string,
-  tags: ?(string[])
+  tags: string
 }
 
 type Props = {
@@ -54,7 +54,7 @@ const AddToolDialogBox = (props: Props) => {
       title,
       link,
       description,
-      tags: tags.length > 0 ? tags.split(' ') : []
+      tags
     }
     callback(tool)
   }

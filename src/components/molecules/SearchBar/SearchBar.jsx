@@ -30,8 +30,9 @@ const style = ({ theme }) => css`
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
-  div {
-    margin: 0 0.5rem 0 1rem;
+
+  .vuttr__searchbar-item{
+    margin: 0 1rem 0 0;
   }
 `
 
@@ -58,11 +59,13 @@ const SearchBar = (props: Props) => {
         value={value}
         color='Ink'
         placeholder={placeholder}
+        className='vuttr__searchbar-item'
       />
       <Checkbox
         isChecked={isSearchTags}
         onCheck={isSearchTagsHandler}
         color='Ink'
+        className='vuttr__searchbar-item'
       />
       <P>search in tags only</P>
     </StyledSearchBar>

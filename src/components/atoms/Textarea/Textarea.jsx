@@ -40,27 +40,30 @@ type Props = {
 const style = ({ theme, color, size }) => css`
   padding: 1rem 1.2rem;
   margin: 0;
-  border: 1px solid ${theme.color.LighterInk};
   vertical-align: baseline;
   background-color: ${theme.color.DarkWhite};
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: ${sizes[size]};
+  font-family: ${theme.fontFamily};
+  color: ${theme.color[color]};
+  background-color: ${theme.color.DarkWhite};
+  display: block;
+  resize: none;
+  width: 100%;
+  overflow: auto;
+  min-height: ${heights[size]};
+  border: 1px solid ${theme.color.MostDarkestWhite};
   border-radius: 20px;
-
-  textarea {
-    font-weight: bold;
-    font-size: ${sizes[size]};
-    font-family: ${theme.fontFamily};
-    color: ${theme.color[color]};
-    background-color: ${theme.color.DarkWhite};
-    display: block;
-    resize: none;
-    width: 100%;
-    border: none;
-    overflow: auto;
-    min-height: ${heights[size]};
+  :hover {
+    background-color: ${theme.color.DarkestWhite};
+  }
+  :focus {
+    background-color: ${theme.color.DarkerWhite};
   }
 `
 
-const StyledTextarea = styled.div`
+const StyledTextarea = styled.textarea`
   ${style}
 `
 
@@ -77,15 +80,16 @@ const Textarea = (props: Props) => {
     className
   } = props
   return (
-    <StyledTextarea size={size} color={color} className={className}>
-      <textarea
-        onChange={e => onChange && onChange(e.target.value)}
-        value={value}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        placeholder={placeholder}
-      />
-    </StyledTextarea>
+    <StyledTextarea
+      size={size}
+      color={color}
+      className={className}
+      onChange={e => onChange && onChange(e.target.value)}
+      value={value}
+      onBlur={onBlur}
+      onFocus={onFocus}
+      placeholder={placeholder}
+    />
   )
 }
 

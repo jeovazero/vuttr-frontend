@@ -44,37 +44,53 @@ type Props = {
 }
 
 const style = ({ theme, prefixIcon, color, size, isFlex }) => css`
-  padding: 0.5rem 1rem;
-  margin: 0;
-  border: 1px solid ${theme.color.LighterInk};
-  font-weight: normal;
-  font-size: ${sizes[size]};
-  vertical-align: baseline;
-  font-family: ${theme.fontFamily};
-  background-color: ${theme.color.DarkWhite};
-  color: ${theme.color[color]};
-  ::before {
-    padding: 0 0.5rem;
-    font-family: 'Ionicons';
-    content: ${prefixIcon ? icons[prefixIcon] : 'none'};
-    display: inline-block;
-  }
   display: ${isFlex ? 'flex' : 'inline-block'};
-  border-radius: 20px;
-  input {
-    font-size: ${sizes[size]};
-    font-weight: normal;
-    font-family: ${theme.fontFamily};
-    color: ${theme.color[color]};
-    border: 0;
-    margin: 0;
-    padding: 0;
+  align-items: center;
+  margin: 0;
+
+  .vuttr__input-wrapper {
+    position: relative;
+    display: ${isFlex ? 'flex' : 'inline-block'};
     width: ${isFlex ? '100%' : 'auto'};
-    background-color: ${theme.color.DarkWhite};
+
+    .vuttr__input-icon {
+      top: 0.5rem;
+      left: 1.25rem;
+      margin: auto;
+      position: absolute;
+      :before {
+        font-family: 'Ionicons';
+        content: ${prefixIcon ? icons[prefixIcon] : 'none'};
+        display: inline-block;
+      }
+    }
+
+    input {
+      vertical-align: baseline;
+      font-size: ${sizes[size]};
+      font-weight: normal;
+      border: 1px solid ${theme.color.MostDarkestWhite};
+      padding: 0.5rem 1rem 0.5rem ${prefixIcon ? '2.5rem' : '1rem'};
+      font-size: ${sizes[size]};
+      font-weight: normal;
+      font-family: ${theme.fontFamily};
+      color: ${theme.color[color]};
+      margin: 0;
+      width: ${isFlex ? '100%' : 'auto'};
+      background-color: ${theme.color.DarkWhite};
+      border-radius: 20px;
+      :hover {
+        background-color: ${theme.color.DarkestWhite};
+      }
+
+      :focus {
+        background-color: ${theme.color.DarkerWhite};
+      }
+    }
   }
 `
 
-const StyledInput = styled.span`
+const StyledInput = styled.div`
   ${style}
 `
 
@@ -100,13 +116,16 @@ const Input = (props: Props) => {
       className={className}
       isFlex={isFlex}
     >
-      <input
-        onChange={e => onChange && onChange(e.target.value)}
-        value={value}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        placeholder={placeholder}
-      />
+      <div className='vuttr__input-wrapper'>
+        <span className='vuttr__input-icon' />
+        <input
+          onChange={e => onChange && onChange(e.target.value)}
+          value={value}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          placeholder={placeholder}
+        />
+      </div>
     </StyledInput>
   )
 }
