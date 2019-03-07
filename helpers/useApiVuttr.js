@@ -1,7 +1,26 @@
-import { useEffect, useState } from 'react'
 import { api } from './apiclient.js'
+import { debounce } from 'throttle-debounce'
+import { useEffect, useState } from 'react'
 
 const apiClient = api('http://localhost:3000')
+
+const debouncedGet = debounce(
+  500,
+  async ({ query, isTagsLike, setData, setIsLoading, setIsError }) => {
+    // console.log('CALL')
+    setIsLoading(true)
+    const params = isTagsLike
+      ? { tags_like: query }
+      : query.length > 0
+        ? { q: query }
+        : {}
+
+    const resp = await apiClient.get({ params })
+    setData(resp)
+    setIsLoading(false)
+    setIsError(null)
+  }
+)
 
 export const useApiVuttr = () => {
   const [data, setData] = useState([])
@@ -17,29 +36,26 @@ export const useApiVuttr = () => {
   const [idDelete, setIdDelete] = useState(null)
 
   const vuttr = async ({ method, query, isTagsLike, tool, id }) => {
-    setIsLoading(true)
     try {
       if (method === 'GET') {
-        const params = isTagsLike
-          ? { tags_like: query }
-          : query.length > 0
-            ? { q: query }
-            : {}
-
-        const resp = await apiClient.get({ params })
-        setData(resp)
+        debouncedGet({ query, isTagsLike, setData, setIsLoading, setIsError })
       } else if (method === 'POST') {
+        setIsLoading(true)
         await apiClient.post({ data: tool })
         setMethod('GET')
+        setIsLoading(false)
+        setIsError(null)
       } else if (method === 'DELETE') {
+        setIsLoading(true)
         await apiClient.delete({ id })
         setMethod('GET')
+        setIsLoading(false)
+        setIsError(null)
       } else {
         throw new Error('Method not specified!')
       }
-      setIsLoading(false)
-      setIsError(null)
     } catch (e) {
+      setData([])
       setIsLoading(false)
       setIsError(e.message)
     }

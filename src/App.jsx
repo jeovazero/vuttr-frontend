@@ -9,9 +9,11 @@ import {
   H1,
   H3,
   SearchBar,
+  Loader,
   Button,
   Card,
   Icon,
+  P,
   AddToolDialogBox,
   RemoveToolDialogBox
 } from './components/index.js'
@@ -74,7 +76,6 @@ const App = ({ className }: Props) => {
     postTool,
     deleteTool
   } = useApiVuttr()
-  console.log({ data, isTagsLike, isLoading, isError })
 
   const [isOpenAddTool, setOpenAddTool] = useState(false)
   const [isOpenRemoveTool, setOpenRemoveTool] = useState(false)
@@ -129,23 +130,32 @@ const App = ({ className }: Props) => {
             </Button>
           </VSpacing>
 
-          <ListWrapper>
-            {data.map((tool, key) => (
-              <VSmallSpacing key={key}>
-                <Card
-                  title={tool.title}
-                  description={tool.description}
-                  tags={tool.tags}
-                  link={tool.link}
-                  highlightTag={highlightTag}
-                  onRemove={() => {
-                    setDeleteToolID(tool.id)
-                    setOpenRemoveTool(true)
-                  }}
-                />
-              </VSmallSpacing>
-            ))}
-          </ListWrapper>
+          {isError ? <P> Error in fetch data </P> : null}
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <ListWrapper>
+              {data.length > 0 ? (
+                data.map((tool, key) => (
+                  <VSmallSpacing key={key}>
+                    <Card
+                      title={tool.title}
+                      description={tool.description}
+                      tags={tool.tags}
+                      link={tool.link}
+                      highlightTag={highlightTag}
+                      onRemove={() => {
+                        setDeleteToolID(tool.id)
+                        setOpenRemoveTool(true)
+                      }}
+                    />
+                  </VSmallSpacing>
+                ))
+              ) : (
+                <P> Results not found</P>
+              )}
+            </ListWrapper>
+          )}
         </Wrapper>
         <AddToolDialogBox
           isOpen={isOpenAddTool}

@@ -64,6 +64,7 @@
     "emotion-theming": "^10.0.7",
     "node-fetch": "^2.3.0",
     "react": "^16.8.2",
-    "react-dom": "^16.8.2"
+    "react-dom": "^16.8.2",
+    "throttle-debounce": "^2.1.0"
   }
 }
