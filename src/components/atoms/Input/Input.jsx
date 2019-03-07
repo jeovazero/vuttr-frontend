@@ -46,7 +46,7 @@ type Props = {
 const style = ({ theme, prefixIcon, color, size, isFlex }) => css`
   padding: 0.5rem 1rem;
   margin: 0;
-  border: 1px solid ${theme.color.LighterInk};
+  border: 1px solid ${theme.color.MostDarkestWhite};
   font-weight: normal;
   font-size: ${sizes[size]};
   vertical-align: baseline;
