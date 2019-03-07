@@ -31,7 +31,7 @@ const style = ({ theme, size, isBlock }) => css`
   background-color: ${theme.color.White};
   display: ${isBlock ? 'block' : 'inline-block'};
   border-radius: 4px;
-  box-shadow: 0 10px 44px -10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 40px -16px rgba(0, 0, 0, 0.2);
 `
 
 const StyledContainer = styled.div`
