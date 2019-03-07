@@ -33,10 +33,8 @@ type Props = {
 const showing = keyframes`
   0%{
     transform: scale(0.3);
-    opacity: 0;
   }
   100%{
-    opacity: 1;
     transform: scale(1);
   }
 
@@ -52,7 +50,7 @@ const style = ({ theme }) => css`
   box-sizing: border-box;
   width: 480px;
 
-  animation: ${showing} 0.2s ease;
+  animation: ${showing} 0.25s ease;
 
   .vuttr__dialogbox__header {
     display: flex;

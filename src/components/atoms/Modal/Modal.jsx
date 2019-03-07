@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import type { Node } from 'react'
 import styled from '@emotion/styled'
-import { css, jsx, keyframes } from '@emotion/core'
+import { css, jsx } from '@emotion/core'
 
 type Props = {
   /** Flag isOpen */
@@ -13,17 +13,7 @@ type Props = {
   children?: Node
 }
 
-const showing = keyframes`
-  0%{
-    opacity: 0;
-  }
-  100%{
-    opacity: 1;
-  }
-`
-
 const style = ({ theme, isOpen }) => css`
-  animation: ${showing} 1s ease-in-out;
   display: ${isOpen ? 'flex' : 'none'};
   position: fixed;
   justify-content: center;
