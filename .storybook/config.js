@@ -10,13 +10,11 @@ import './index.css'
 addDecorator(
   withInfo({
     inline: true,
-    header: false,
+    header: false
   })
 )
 
-addDecorator(
-  story => <ThemeProvider theme={theme}>{story()}</ThemeProvider>
-)
+addDecorator(story => <ThemeProvider theme={theme}>{story()}</ThemeProvider>)
 
 const req = require.context('../src/components', true, /.stories.js$/)
 function loadStories () {
@@ -27,8 +25,8 @@ addDecorator(withKnobs)
 
 addParameters({
   options: {
-    name: 'VUTTR',
-    addonPanelInRight: true
+    url: 'https://github.com/jeovazero/vuttr-frontend',
+    name: 'VUTTR'
   }
 })
 
