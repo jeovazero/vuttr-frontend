@@ -7,18 +7,22 @@ const apiClient = api('http://localhost:3000')
 const debouncedGet = debounce(
   500,
   async ({ query, isTagsLike, setData, setIsLoading, setIsError }) => {
-    // console.log('CALL')
-    setIsLoading(true)
-    const params = isTagsLike
-      ? { tags_like: query }
-      : query.length > 0
-        ? { q: query }
-        : {}
+    try {
+      setIsLoading(true)
+      const params = isTagsLike
+        ? { tags_like: query }
+        : query.length > 0
+          ? { q: query }
+          : {}
 
-    const resp = await apiClient.get({ params })
-    setData(resp)
-    setIsLoading(false)
-    setIsError(null)
+      const resp = await apiClient.get({ params })
+      setData(resp)
+      setIsLoading(false)
+      setIsError(null)
+    } catch (error) {
+      setIsError(true)
+      setIsLoading(false)
+    }
   }
 )
 
@@ -38,7 +42,13 @@ export const useApiVuttr = () => {
   const vuttr = async ({ method, query, isTagsLike, tool, id }) => {
     try {
       if (method === 'GET') {
-        debouncedGet({ query, isTagsLike, setData, setIsLoading, setIsError })
+        await debouncedGet({
+          query,
+          isTagsLike,
+          setData,
+          setIsLoading,
+          setIsError
+        })
       } else if (method === 'POST') {
         setIsLoading(true)
         await apiClient.post({ data: tool })

@@ -99,6 +99,7 @@ const App = ({ className }: Props) => {
       postTool(newTool, () => setOpenAddTool(false))
     }
   }
+  console.log({ isError, isLoading })
 
   return (
     <ThemeProvider theme={theme}>
@@ -130,10 +131,9 @@ const App = ({ className }: Props) => {
             </Button>
           </VSpacing>
 
-          {isError ? <P> Error in fetch data </P> : null}
-          {isLoading ? (
-            <Loader />
-          ) : (
+          {isError && <P> Error in fetch data </P>}
+          {isLoading && <Loader />}
+          {!isLoading && !isError && (
             <ListWrapper>
               {data.length > 0 ? (
                 data.map((tool, key) => (
