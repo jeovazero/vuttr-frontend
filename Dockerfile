@@ -1,4 +1,4 @@
-FROM node:carbon-alpine as build
+FROM node:dubnium-alpine as build
 
 RUN mkdir -p /home/node/vuttr-client
 
