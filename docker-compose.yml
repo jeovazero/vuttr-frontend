@@ -1,0 +1,9 @@
+version: "2"
+services:
+  client:
+    build: .
+    ports:
+      - "3001:80"
+    image: "vuttr:frontend"
+    environment:
+      API_BASE_URL: "http://localhost:3000"
